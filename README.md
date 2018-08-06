@@ -12,7 +12,7 @@ Confounder filetering (CF) method is an interesting method that helps to improve
 ## File Structure:
 
 * vanilla/ example files of the baseline vanilla CNN
-* CF/ example files CF method
+* CF/ example files of CF method
 * By comparing the differences between these two files, one should have a better idea about how to plugging CF method into an arbitrary model. 
 
 
