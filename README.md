@@ -1,8 +1,8 @@
 # Confounder Filtering Method
 
-Implementation of the Precision Lasso in this paper:
+Example implementation of this paper:
 
-    ''Wang H, Wu Z, Xing EP. Removing Confounding Factors Associated Weights in Deep Neural Networks Improves the Prediction Accuracy for Healthcare Applications.''
+    Wang, Haohan, Zhenglin Wu, and Eric P. Xing. "Removing Confounding Factors Associated Weights in Deep Neural Networks Improves the Prediction Accuracy for Healthcare Applications." arXiv preprint arXiv:1803.07276 (2018).
 
 ## Method Introduction
 
