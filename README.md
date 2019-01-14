@@ -2,7 +2,7 @@
 
 Example implementation of this paper:
 
-    Wang, Haohan, Zhenglin Wu, and Eric P. Xing. "Removing Confounding Factors Associated Weights in Deep Neural Networks Improves the Prediction Accuracy for Healthcare Applications."
+H. Wang, Z. Wu and E. P. Xing, [Removing Confounding Factors Associated Weights in Deep Neural Networks Improves the Prediction Accuracy for Healthcare Applications](https://psb.stanford.edu/psb-online/proceedings/psb19/wang.pdf), Proceedings of 24th Pacific Symposium on Biocomputing (PSB 2019).
 
 ## Method Introduction
 
