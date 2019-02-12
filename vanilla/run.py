@@ -15,14 +15,23 @@ sys.path.append('../')
 def loadData():
     '''
     example method for loading data
-    :return:
+    X: data
+    Y: labels
+    train: training data
+    val: validation data
+    test: testing data
     '''
-    return None, None, None, None, None, None
+    Xtrain = None
+    Ytrain = None
+    Xval = None
+    Yval = None
+    Xtest = None
+    Ytest = None
+    return Xtrain, Ytrain, Xval, Yval, Xtest, Ytest
 
 import tensorflow as tf
 
 from vanilla.cnn import MNISTcnn
-#from tensorflow.examples.tutorials.mnist import input_data
 
 def predict(sess, x, keep_prob, pred, Xtest, Ytest, output_file):
     feed_dict = {x:Xtest, keep_prob: 1.0}
@@ -66,30 +75,19 @@ def train(args, Xtrain, Ytrain, Xval, Yval, Xtest, Ytest):
         best_validate_accuracy = 0
         score = 0
 
-        norms = []
-
         for epoch in range(args.epochs):
             begin = time.time()
 
             # train
             train_accuracies = []
-            norm_sub = []
             for i in range(num_batches):
 
                 batch_x = Xtrain[i*args.batch_size:(i+1)*args.batch_size,:]
                 batch_y = Ytrain[i*args.batch_size:(i+1)*args.batch_size,:]
 
-                _, acc, norm = sess.run([optimizer, model.accuracy, model.norm], feed_dict={x: batch_x, y: batch_y, model.keep_prob: 0.5, model.keep_prob2: min(1, 0.5*float(epoch)/10+0.5)})
-                # if i%5!=4:
-                #     print (acc, end='\t')
-                # else:
-                #     print (acc)
+                _, acc = sess.run([optimizer, model.accuracy], feed_dict={x: batch_x, y: batch_y})
                 train_accuracies.append(acc)
-                norm_sub.append(norm)
             train_acc_mean = np.mean(train_accuracies)
-            # print ()
-            norm_sub_value = np.mean(norm_sub)
-            norms.append(norm_sub_value)
 
             # compute loss over validation data
             if validation:
@@ -97,12 +95,12 @@ def train(args, Xtrain, Ytrain, Xval, Yval, Xtest, Ytest):
                 for i in range(val_num_batches):
                     batch_x = Xval[i*args.batch_size:(i+1)*args.batch_size,:]
                     batch_y = Yval[i*args.batch_size:(i+1)*args.batch_size,:]
-                    acc = sess.run(model.accuracy, feed_dict={x: batch_x, y: batch_y, model.keep_prob: 1.0, model.keep_prob2: 1.0})
+                    acc = sess.run(model.accuracy, feed_dict={x: batch_x, y: batch_y})
                     val_accuracies.append(acc)
                 val_acc_mean = np.mean(val_accuracies)
 
                 # log progress to console
-                print("Epoch %d, time = %ds, train accuracy = %.4f, validation accuracy = %.4f, norm = %.4f" % (epoch, time.time()-begin, train_acc_mean, val_acc_mean, norm_sub_value))
+                print("Epoch %d, time = %ds, train accuracy = %.4f, validation accuracy = %.4f" % (epoch, time.time()-begin, train_acc_mean, val_acc_mean))
             else:
                 print("Epoch %d, time = %ds, train accuracy = %.4f" % (epoch, time.time()-begin, train_acc_mean))
             sys.stdout.flush()
@@ -114,7 +112,7 @@ def train(args, Xtrain, Ytrain, Xval, Yval, Xtest, Ytest):
                 for i in range(test_num_batches):
                     batch_x = Xtest[i*args.batch_size:(i+1)*args.batch_size,:]
                     batch_y = Ytest[i*args.batch_size:(i+1)*args.batch_size,:]
-                    acc = sess.run(model.accuracy, feed_dict={x: batch_x, y: batch_y, model.keep_prob: 1.0})
+                    acc = sess.run(model.accuracy, feed_dict={x: batch_x, y: batch_y})
                     test_accuracies.append(acc)
                 score = np.mean(test_accuracies)
 
@@ -129,17 +127,6 @@ def train(args, Xtrain, Ytrain, Xval, Yval, Xtest, Ytest):
 
         print("Best Validated Model Prediction Accuracy = %.4f " % (score))
 
-        # return score
-
-        # predict test data
-        # predict(sess, x, model.keep_prob, model.pred, Xtest, Ytest, args.output)
-        
-        
-        # origiinal test data from 'http://yann.lecun.com/exdb/mnist/'
-        # """
-        # acc = sess.run(model.accuracy, feed_dict={x: data.test.images, y: data.test.labels, model.keep_prob: 1.0})
-        # print("test accuracy %g"%acc)
-        # """
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
@@ -150,9 +137,6 @@ if __name__ == "__main__":
     parser.add_argument('-b', '--batch_size', type=int, default=128, help='Batch size during training per GPU')
     parser.add_argument('-s', '--seed', type=int, default=0, help='random seed for generating data')
     args = parser.parse_args()
-
-    # pretty print args
-    # print('input args:\n', json.dumps(vars(args), indent=4, separators=(',',':')))
 
     if not os.path.exists(args.ckpt_dir):
         os.makedirs(args.ckpt_dir)

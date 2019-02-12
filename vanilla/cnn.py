@@ -19,8 +19,6 @@ class MNISTcnn(object):
     def __init__(self, x, y, conf):
         self.x = tf.reshape(x, shape=[-1, 28, 28, 1])
         self.y = y
-        self.keep_prob = tf.placeholder(tf.float32)
-        self.keep_prob2 = tf.placeholder(tf.float32)
 
         # conv1
         with tf.variable_scope('conv1'):
@@ -44,8 +42,6 @@ class MNISTcnn(object):
             h_pool2_flat = tf.reshape(h_pool2, [-1, shape])
             h_fc1 = tf.nn.relu(tf.matmul(h_pool2_flat, W_fc1) + b_fc1)
 
-        # dropout
-        # h_fc1_drop = tf.nn.dropout(h_fc1, self.keep_prob)
 
         # fc2
         with tf.variable_scope("fc2"):
