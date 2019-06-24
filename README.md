@@ -21,8 +21,8 @@ Confounder filetering (CF) method is an interesting method that helps to improve
         - [Line 62](https://github.com/HaohanWang/CF/blob/master/CF/cnn.py#L62) defines `setWeights()`
     - run.py splits into three phases
         - [Phase 1](https://github.com/HaohanWang/CF/blob/master/CF/run.py#L91) is roughly the same as vanilla method, with an extra step to save weights at [Line 140](https://github.com/HaohanWang/CF/blob/master/CF/run.py#L140)
-        - [Phase 2](https://github.com/HaohanWang/CF/blob/master/CF/run.py#L143) starts at Line 143
-        - [Phase 3](https://github.com/HaohanWang/CF/blob/master/CF/run.py#L161) starts at Line 161
+        - [Phase 2](https://github.com/HaohanWang/CF/blob/master/CF/run.py#L143)
+        - [Phase 3](https://github.com/HaohanWang/CF/blob/master/CF/run.py#L161)
         
 
 
