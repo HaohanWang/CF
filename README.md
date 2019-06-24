@@ -1,4 +1,4 @@
-![CF](cf.PNG "CF")
+![CF](cf.PNG "Confounder Filtering")
 
 # Confounder Filtering Method
 
@@ -8,8 +8,15 @@ H. Wang, Z. Wu and E. P. Xing, [Removing Confounding Factors Associated Weights 
 
 ## Method Introduction
 
-Confounder filetering (CF) method is an interesting method that helps to improve the generalization of neural networks by removing the weights that are associated with confounding factors. In contrast to many methods that work with the representation learned through the data, we directly work with the weights that will result in the representation. 
+Confounder filetering (CF) method is a method that helps to improve the generalization of neural networks by removing the weights that are associated with confounding factors. In contrast to many methods that work with the representation learned through the data, we directly work with the weights that will result in the representation.  
+The CF method falls into three phases:  
+* Phase 1 directly trains the neural network in conventional manner.  
+* Phase 2 identifies the weights that are associated with the confounding factor. 
+* Phase 3 remove the weights that are associated with the confounding factor.  
 
+These three phases are illustrated in the following figure. 
+
+![Method](method.PNG "The method has three phases")
 
 ## File Structure:
 
