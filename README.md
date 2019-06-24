@@ -1,3 +1,5 @@
+![CF](cf.PNG "CF")
+
 # Confounder Filtering Method
 
 Example implementation of this paper:
