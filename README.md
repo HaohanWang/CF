@@ -13,12 +13,20 @@ Confounder filetering (CF) method is an interesting method that helps to improve
 
 ## File Structure:
 
-* vanilla/ example files of the baseline vanilla CNN
-* CF/ example files of CF method
-* By comparing the differences between these two files, one should have a better idea about how to plugging CF method into an arbitrary model. 
+* [vanilla/](https://github.com/HaohanWang/CF/tree/master/vanilla) example files of the baseline vanilla CNN
+* [CF/](https://github.com/HaohanWang/CF/tree/master/CF) example files of CF method
+* By comparing the differences between these two files, one should have a better idea about how to plugging CF method into an arbitrary model, specifically:   
+    - cnn.py defines two extra terms
+        - [Line 60](https://github.com/HaohanWang/CF/blob/master/CF/cnn.py#L60) defines `self.layer`
+        - [Line 62](https://github.com/HaohanWang/CF/blob/master/CF/cnn.py#L62) defines `setWeights()`
+    - run.py splits into three phases
+        - [Phase 1](https://github.com/HaohanWang/CF/blob/master/CF/run.py#L91) is roughly the same as vanilla method, with an extra step to save weights at [Line 140](https://github.com/HaohanWang/CF/blob/master/CF/run.py#L140)
+        - [Phase 2](https://github.com/HaohanWang/CF/blob/master/CF/run.py#L143) starts at Line 143
+        - [Phase 3](https://github.com/HaohanWang/CF/blob/master/CF/run.py#L161) starts at Line 161
+        
 
 
 ## Contact
 [Haohan Wang](http://www.cs.cmu.edu/~haohanw/)
-
+&middot;
 [@HaohanWang](https://twitter.com/HaohanWang)
