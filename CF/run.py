@@ -159,7 +159,7 @@ def train(args, Xtrain, Ytrain, Xval, Yval, Xtest, Ytest, Ztrain):
 
 
         # Phase Three
-        weights[args.layer][changes>args.threshold] = 1
+        weights[args.layer][changes>args.threshold] = 0
         model.setWeights(sess, weights)
 
         ckpt_file = os.path.join(args.ckpt_dir, 'mnist_model.ckpt')
